@@ -1,6 +1,7 @@
 package Lesson_2;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 class Game {
@@ -10,7 +11,7 @@ class Game {
     final static String O = "|0|";
     static Scanner scanner;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Game TicTacToe = new Game();
         TicTacToe.game();
     }
@@ -18,7 +19,8 @@ class Game {
     public Game() {
         scanner = new Scanner(System.in);
     }
-    void game(){
+    void game() throws FileNotFoundException {
+        WriteToFile writeToFile = new WriteToFile();
         new Player1();
         new Player2();
         fieldCoordinates();
@@ -32,6 +34,7 @@ class Game {
             if (checkWin(X)){
                 System.out.println(Player1.getName() + " победил!");
                 Player1.setScore(Player1.getScore() + 1);
+                writeToFile.writeScore();
                 retry();
                 break;
             };
@@ -45,6 +48,7 @@ class Game {
             if (checkWin(O)){
                 System.out.println(Player2.getName() + " победил!");
                 Player2.setScore(Player2.getScore() + 1);
+                writeToFile.writeScore();
                 retry();
                 break;
             };
@@ -98,7 +102,7 @@ class Game {
          return true;
      };
 
-     static void retry(){
+     static void retry() throws FileNotFoundException {
          System.out.println("Хотите сыграть еще раз? (1 - да, 0 - нет): ");
          int a = scanner.nextInt();
         if (a == 1){
@@ -119,8 +123,6 @@ class Game {
              System.out.println();
          }
      }
-
-
 
 }
 

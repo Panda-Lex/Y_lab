@@ -1,5 +1,7 @@
 package Lesson_2;
 
+
+
 public class Player2 extends Game{
     private static String name;
     private static int score;
